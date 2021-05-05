@@ -1,0 +1,44 @@
+#test with strings
+string1 = str("test")
+string2 = string1
+string2 = "test2"
+print(string1)
+print(string2)
+print(id(string1)) #object1
+print(id(string2)) #object2
+
+#test with float
+float1 = 3.1234
+float2 = float1
+float2 = 4.4354
+print(float1)
+print(float2)
+print(id(float1)) #object1
+print(id(float2)) #object2
+
+#test with int
+int1 = 3
+int2 = int1
+int2 = 4
+print(int1)
+print(int2)
+print(id(int1)) #object1
+print(id(int2)) #object2
+
+#test with list
+mylist1 = ["apple", "banana", "cherry"]
+mylist2 = mylist1
+mylist2[0] = "peanut"
+print(mylist1)
+print(mylist2)
+print(id(mylist1)) #object1
+print(id(mylist2)) #object1
+
+mytuple1 = ("apple", "banana", "cherry")
+mytuple2 = mytuple1
+#mytuple2[0]="peanut" #breaks !!!
+mytuple2 = ("peanut", "banana", "cherry")
+print(mytuple1)
+print(mytuple2)
+print(id(mytuple1)) #object1
+print(id(mytuple2)) #object2
