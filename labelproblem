@@ -1,0 +1,55 @@
+import pandas as pd #tabular data
+import numpy as np #numeric operations
+import seaborn as sns
+
+import matplotlib.pyplot as plt
+import matplotlib.pylab as pylab
+#import xlrd as xlrd
+
+pd.set_option('display.max_rows', 10000)
+pd.set_option('display.max_columns', 10000)
+pd.set_option('display.width', 10000)
+ 
+from matplotlib import pyplot as plt #visualizations
+import seaborn as sns
+%matplotlib inline
+
+
+area                     = pd.read_csv("C:/Users/svstu/csv/clean/area_clean.csv",sep=',') 
+crime                    = pd.read_csv("C:/Users/svstu/csv/clean/crime_clean.csv",sep=',')
+education                = pd.read_csv("C:/Users/svstu/csv/clean/edu_clean.csv",sep=',')
+income                   = pd.read_csv("C:/Users/svstu/csv/clean/income_clean.csv",sep=',')
+life                     = pd.read_csv("C:/Users/svstu/csv/clean/life_expectancy_clean.csv",sep=',')
+region                   = pd.read_csv("C:/Users/svstu/csv/clean/region_clean.csv",sep=',')
+
+df = pd.merge(education, life, how="inner", on="State")
+df = pd.merge(df, crime, how="inner", on="State")
+df = pd.merge(df, area, how="inner", on="State")
+df = pd.merge(df, income, how="inner", on="State")
+df = pd.merge(df, region, how="inner", on="State")
+# make the variables Region and Division categorical
+df["Region"] = pd.Categorical(df["Region"], ordered=False)
+df["Division"] = pd.Categorical(df["Division"], ordered=False)
+df.head()
+
+
+#2. Which state has the highest life expectancy and which state the lowest? (lables not correct)
+
+x = np.sort(df['LifeExp2018'])
+y = np.arange(1, len(x)+1)/len(x)
+z = df.index
+plt.figure(figsize=(9.4,9.8))
+plt.xticks(np.arange(min(x), max(x)+1, 1.0))
+plt.yticks(np.arange(0, 1, step=0.1))  # Set label locations.
+plt.scatter(x, y, s=20)
+
+for i, label in enumerate(z):
+    plt.annotate(z[i], 
+                 (x[i], y[i]),
+                 xytext=(8, 0),     # Offset text by 7 points to the right
+                 textcoords='offset points', # tell it to use offset points
+                 )
+
+
+plt.show()
+
